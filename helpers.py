@@ -71,11 +71,12 @@ def kustuta_element(nimetus):
         elemendid.remove(elemendid[nimetused.index(nimetus)])
 
 
-# kustutame terve listi
+# kustutame TERVE listi
 
-def kustuta_kõik():
+def kustuta_koik():
     global elemendid
     elemendid.clear()
+
 
 def main():
     # loome katse andmestiku
@@ -104,8 +105,8 @@ def main():
     print(loe_element("vein"))
 
     # testime kõikide elementide kustutamist
-    kustuta_kõik()
-    print(elemendid)
+    kustuta_koik()
+    print(loe_elemendid())
 
 
 # käivitamine

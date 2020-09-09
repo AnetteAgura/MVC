@@ -7,10 +7,9 @@ def lisa_element(nimetus, hind, kogus):
     global elemendid
     nimetused = []
     for element in elemendid:
-        if nimetus in element.values():
-            nimetused.append(nimetus)
+        nimetused.append(list(element.values())[0])
     if nimetus in nimetused:
-        print("Element {} on juba olemas.".format(nimetus))
+        return "Element {} on juba olemas.".format(nimetus)
     else:
         elemendid.append({"nimetus": nimetus, "hind": hind, "kogus": kogus})
 
@@ -46,6 +45,37 @@ def loe_element(nimetus):
         return elemendid[nimetused.index(nimetus)]
 
 
+# uuendame KONKREETSE elemendi
+
+def uuenda_element(nimetus, hind, kogus):
+    global elemendid
+    nimetused = []
+    for element in elemendid:
+        nimetused.append(list(element.values())[0])
+    if nimetus not in nimetused:
+        print("Elementi {} ei saa uuendada, kuna see ei eksisteeri.".format(nimetus))
+    else:
+        elemendid[nimetused.index(nimetus)] = {"nimetus": nimetus, "hind": hind, "kogus": kogus}
+
+
+# kustutame KONKREETSE elemendi
+
+def kustuta_element(nimetus):
+    global elemendid
+    nimetused = []
+    for element in elemendid:
+        nimetused.append(list(element.values())[0])
+    if nimetus not in nimetused:
+        print("Elementi {} ei saa kustutada, kuna see ei eksisteeri.".format(nimetus))
+    else:
+        elemendid.remove(elemendid[nimetused.index(nimetus)])
+
+
+# kustutame terve listi
+
+def kustuta_kõik():
+    global elemendid
+    elemendid.clear()
 
 def main():
     # loome katse andmestiku
@@ -57,17 +87,25 @@ def main():
 
     # testime elemetide lisamist
     lisa_elemendid(katse_elemendid)
-    print(elemendid)
 
     # lisame elemendi
     lisa_element("kohupiim", 0.90, 15)
-    print(elemendid)
 
     lisa_element("leib", 0.80, 5)
-    print(elemendid)
 
     # testime elemetide lugemist
+    # print(loe_element("vein"))
+
+    # testime elemedi uuendamist
+    uuenda_element("limonaad", 10.0, 10)
+
+    # testime elemendi kustutamist
+    kustuta_element("vein")
     print(loe_element("vein"))
+
+    # testime kõikide elementide kustutamist
+    kustuta_kõik()
+    print(elemendid)
 
 
 # käivitamine

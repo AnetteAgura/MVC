@@ -15,14 +15,23 @@ def lisa_elemendid(elementide_nimekiri):
     elemendid = elementide_nimekiri
 
 
-katse_elemendid = [
-    {"nimetus": "leib", "hind": 0.80, "kogus": 20},
-    {"nimetus": "piim", "hind": 0.50, "kogus": 15},
-    {"nimetus": "vein", "hind": 5.60, "kogus": 5},
-]
+def main():
+    # loome katse andmestiku
+    katse_elemendid = [
+        {"nimetus": "leib", "hind": 0.80, "kogus": 20},
+        {"nimetus": "piim", "hind": 0.50, "kogus": 15},
+        {"nimetus": "vein", "hind": 5.60, "kogus": 5},
+    ]
 
-lisa_elemendid(katse_elemendid)
-print(elemendid)
+    # testime elemetide lisamist
+    lisa_elemendid(katse_elemendid)
+    print(elemendid)
 
-lisa_element("kohupiim", 0.90, 15)
-print(elemendid)
+    # lisame elemendi
+    lisa_element("kohupiim", 0.90, 15)
+    print(elemendid)
+
+
+# käivitamine
+if __name__ == "__main__":
+    main()

@@ -23,6 +23,16 @@ def lisa_elemendid(elementide_nimekiri):
     elemendid = elementide_nimekiri
 
 
+# loeme ELEMENDID korraga
+
+def loe_elemendid():
+    global elemendid
+    loetud_elemendid = []
+    for element in elemendid:
+        loetud_elemendid.append(element)
+    return loetud_elemendid
+
+
 def main():
     # loome katse andmestiku
     katse_elemendid = [
@@ -41,6 +51,9 @@ def main():
 
     lisa_element("leib", 0.80, 5)
     print(elemendid)
+
+    # testime elemetide lugemist
+    print(loe_elemendid())
 
 
 # käivitamine

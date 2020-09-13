@@ -1,6 +1,21 @@
+import pandas as pd
+
 elemendid = []
 
+# loome katse andmestiku
+katse_elemendid = [
+    {"Nimetus": "leib", "Hind": 0.80, "Kogus": 20},
+    {"Nimetus": "piim", "Hind": 0.50, "Kogus": 15},
+    {"Nimetus": "vein", "Hind": 5.60, "Kogus": 5},
+    ]
+
 # lisame ELEMENT juurde
+
+
+def Convert(katse_elemendid):
+    it = iter(katse_elemendid)
+    res_dct = dict(zip(it, it))
+    return res_dct
 
 
 def lisa_element(nimetus, hind, kogus):
@@ -11,7 +26,7 @@ def lisa_element(nimetus, hind, kogus):
     if nimetus in nimetused:
         return "Element {} on juba olemas.".format(nimetus)
     else:
-        elemendid.append({"nimetus": nimetus, "hind": hind, "kogus": kogus})
+        elemendid.append({"Nimetus": nimetus, "Hind": hind, "Kogus": kogus})
 
 
 # lisame ELEMENDID KORRAGA juurde
@@ -29,8 +44,8 @@ def loe_elemendid():
     loetud_elemendid = []
     for element in elemendid:
         loetud_elemendid.append(element)
-    return loetud_elemendid
-
+    df = pd.DataFrame(loetud_elemendid)
+    print(df)
 
 # loeme konkreetne element
 
@@ -79,12 +94,6 @@ def kustuta_koik():
 
 
 def main():
-    # loome katse andmestiku
-    katse_elemendid = [
-        {"nimetus": "leib", "hind": 0.80, "kogus": 20},
-        {"nimetus": "piim", "hind": 0.50, "kogus": 15},
-        {"nimetus": "vein", "hind": 5.60, "kogus": 5},
-    ]
 
     # testime elemetide lisamist
     lisa_elemendid(katse_elemendid)
@@ -94,6 +103,8 @@ def main():
 
     lisa_element("leib", 0.80, 5)
 
+    loe_elemendid()
+
     # testime elemetide lugemist
     # print(loe_element("vein"))
 
@@ -102,11 +113,9 @@ def main():
 
     # testime elemendi kustutamist
     kustuta_element("vein")
-    print(loe_element("vein"))
 
     # testime kõikide elementide kustutamist
     kustuta_koik()
-    print(loe_elemendid())
 
 
 # käivitamine

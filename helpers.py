@@ -11,13 +11,6 @@ katse_elemendid = [
 
 # lisame ELEMENT juurde
 
-
-def Convert(katse_elemendid):
-    it = iter(katse_elemendid)
-    res_dct = dict(zip(it, it))
-    return res_dct
-
-
 def lisa_element(nimetus, hind, kogus):
     global elemendid
     nimetused = []

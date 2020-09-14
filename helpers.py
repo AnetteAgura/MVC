@@ -1,37 +1,25 @@
+import exceptions
 import pandas as pd
 
 elemendid = []
 
-# loome katse andmestiku
-katse_elemendid = [
-    {"Nimetus": "leib", "Hind": 0.80, "Kogus": 20},
-    {"Nimetus": "piim", "Hind": 0.50, "Kogus": 15},
-    {"Nimetus": "vein", "Hind": 5.60, "Kogus": 5},
-    ]
-
 # lisame ELEMENT juurde
-
 def lisa_element(nimetus, hind, kogus):
     global elemendid
     nimetused = []
     for element in elemendid:
         nimetused.append(list(element.values())[0])
     if nimetus in nimetused:
-        return "Element {} on juba olemas.".format(nimetus)
+        raise exceptions.ElementJubaOlemas("Element {} on juba olemas".format(nimetus))
     else:
-        elemendid.append({"Nimetus": nimetus, "Hind": hind, "Kogus": kogus})
-
+        elemendid.append({"nimetus":nimetus, "hind":hind, "kogus":kogus})
 
 # lisame ELEMENDID KORRAGA juurde
-
-
 def lisa_elemendid(elementide_nimekiri):
     global elemendid
     elemendid = elementide_nimekiri
 
-
 # loeme ELEMENDID korraga
-
 def loe_elemendid():
     global elemendid
     loetud_elemendid = []
@@ -40,77 +28,77 @@ def loe_elemendid():
     df = pd.DataFrame(loetud_elemendid)
     print(df)
 
-# loeme konkreetne element
-
+# loeme KONKREETNE element
 def loe_element(nimetus):
     global elemendid
     nimetused = []
     for element in elemendid:
             nimetused.append(list(element.values())[0])
     if nimetus not in nimetused:
-        return "Elementi {} ei eksisteeri.".format(nimetus)
+        return "Elementi {} ei eksisteeri".format(nimetus)
     else:
-        return elemendid[nimetused.index(nimetus)]
+       return elemendid[nimetused.index(nimetus)]
 
-
-# uuendame KONKREETSE elemendi
-
+# uuendame KONKREETSET elementi
 def uuenda_element(nimetus, hind, kogus):
     global elemendid
     nimetused = []
     for element in elemendid:
         nimetused.append(list(element.values())[0])
     if nimetus not in nimetused:
-        print("Elementi {} ei saa uuendada, kuna see ei eksisteeri.".format(nimetus))
+        print("Elementi {} ei saa uuendada, kuna ta ei eksisteeri".format(nimetus))
     else:
-        elemendid[nimetused.index(nimetus)] = {"nimetus": nimetus, "hind": hind, "kogus": kogus}
+        elemendid[nimetused.index(nimetus)] = {"nimetus":nimetus, "hind":hind, "kogus":kogus}
 
-
-# kustutame KONKREETSE elemendi
-
+# kustutame KONKREETSET elementi
 def kustuta_element(nimetus):
     global elemendid
     nimetused = []
     for element in elemendid:
         nimetused.append(list(element.values())[0])
     if nimetus not in nimetused:
-        print("Elementi {} ei saa kustutada, kuna see ei eksisteeri.".format(nimetus))
+        print("Elementi {} ei saa kustutada, kuna ta ei eksisteeri".format(nimetus))
     else:
         elemendid.remove(elemendid[nimetused.index(nimetus)])
 
-
-# kustutame TERVE listi
-
-def kustuta_koik():
+# kustutame KÕIK elemendid
+def kustuta_elemendid():
     global elemendid
     elemendid.clear()
 
-
 def main():
+    # loome katseandmestik
+    katse_elemendid = [
+        {"nimetus": "leib", "hind":0.80, "kogus": 20},
+        {"nimetus": "piim", "hind":0.50, "kogus": 15},
+        {"nimetus": "vein", "hind":5.60, "kogus": 5},
+    ]
 
-    # testime elemetide lisamist
+    # testime elementide lisamist
     lisa_elemendid(katse_elemendid)
 
-    # lisame elemendi
+    # testime üksiku elemendi lisamist
     lisa_element("kohupiim", 0.90, 15)
+    #lisa_element("vein", 5.60, 5)
 
-    lisa_element("leib", 0.80, 5)
+    print(loe_elemendid())
 
-    loe_elemendid()
+    # testime elementide lugemist
+    #print(loe_element("vein"))
+    #print(loe_element("limonaad"))
 
-    # testime elemetide lugemist
-    # print(loe_element("vein"))
-
-    # testime elemedi uuendamist
-    uuenda_element("limonaad", 10.0, 10)
+    # testime elemendi uuendamist
+    uuenda_element("vein", 10.0, 10)
+    print(loe_element("vein"))
 
     # testime elemendi kustutamist
     kustuta_element("vein")
+    print(loe_element("vein"))
 
-    # testime kõikide elementide kustutamist
-    kustuta_koik()
+    # testime elementide kustutamist
+    kustuta_elemendid()
+    print(loe_elemendid())
 
-
-# käivitamine
+# käivitame
 if __name__ == "__main__":
     main()

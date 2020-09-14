@@ -12,8 +12,11 @@ class Controller:
 
     # elemendi kuvamine
     def kuva_element(self, nimetus):
-        element = self.mudel.loe_element(nimetus)
-        self.vaade.kuva_element(nimetus, element)
+        try:
+            element = self.mudel.loe_element(nimetus)
+            self.vaade.kuva_element(nimetus, element)
+        except exceptions.ElementiEiOle as e:
+            self.vaade.veateade_element_ei_ole(nimetus, e)
 
     # elemendi lisamine
     def lisa_element(self, nimetus, hind, kogus):
@@ -24,7 +27,7 @@ class Controller:
         try:
             self.mudel.lisa_element(nimetus, hind, kogus)
             self.vaade.lisa_element(nimetus, hind, kogus)
-        except exceptions.ElementiEiOle as e:
+        except exceptions.ElementJubaOlemas as e:
             self.vaade.veateade_element_juba_olemas(nimetus, e)
 
     # elemendi uuendamine
@@ -33,10 +36,12 @@ class Controller:
             print("Hind peab olema suurem kui 0 EUR")
         elif (kogus <= 0):
             print("Kogus peab olema suurem kui 0")
-        else:
+        try:
             vana_element = self.mudel.loe_element(nimetus)
             self.mudel.uuenda_element(nimetus, hind, kogus)
             self.vaade.uuenda_element(nimetus, vana_element['hind'], vana_element['kogus'], hind, kogus)
+        except exceptions.ElementiEiOle as e:
+            self.vaade.veateade_element_ei_ole(nimetus, e)
 
     # elemendi kustutamine
     def kustuta_element(self, nimetus):

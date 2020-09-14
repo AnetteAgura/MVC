@@ -1,8 +1,10 @@
+import pandas as pd
+
 class View:
     def kuva_elemendid(self, elemendid):
         print("Kõik elemendid")
-        for element in elemendid:
-            print("- {}".format(element))
+        df = pd.DataFrame(elemendid)
+        print(df)
 
     def kuva_element(self, nimetus, element):
         print(" Kuvame {} elementi andmed".format(nimetus))
@@ -13,8 +15,16 @@ class View:
         print("Lisatud {} hinnaga {}EUR koguses {}".format(nimetus, hind, kogus))
 
     def veateade_element_juba_olemas(self, nimetus, veateade):
+        print("=============================================")
         print("Elemendi {} juba olemas.".format(nimetus))
-        print(veateade.args[0])
+        print(veateade)
+        print("=============================================")
+
+    def veateade_element_ei_ole(self, nimetus, veateade):
+        print("=============================================")
+        print("Elemendi {} lugemise probleem.".format(nimetus))
+        print(veateade)
+        print("=============================================")
 
     def uuenda_element(self, nimetus, vana_hind, vana_kogus, uus_hind, uus_kogus):
         print("Elemendi {} uuendamine".format(nimetus))

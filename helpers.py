@@ -26,7 +26,7 @@ def loe_elemendid():
     for element in elemendid:
         loetud_elemendid.append(element)
     df = pd.DataFrame(loetud_elemendid)
-    print(df)
+    return df
 
 # loeme KONKREETNE element
 def loe_element(nimetus):
@@ -35,7 +35,7 @@ def loe_element(nimetus):
     for element in elemendid:
             nimetused.append(list(element.values())[0])
     if nimetus not in nimetused:
-        return "Elementi {} ei eksisteeri".format(nimetus)
+        raise exceptions.ElementiEiOle("Elementi {} ei eksisteeri".format(nimetus))
     else:
        return elemendid[nimetused.index(nimetus)]
 
@@ -46,7 +46,7 @@ def uuenda_element(nimetus, hind, kogus):
     for element in elemendid:
         nimetused.append(list(element.values())[0])
     if nimetus not in nimetused:
-        print("Elementi {} ei saa uuendada, kuna ta ei eksisteeri".format(nimetus))
+        raise exceptions.ElementiEiSaa("Elementi {} ei saa uuendada, kuna ta ei eksisteeri".format(nimetus))
     else:
         elemendid[nimetused.index(nimetus)] = {"nimetus":nimetus, "hind":hind, "kogus":kogus}
 
